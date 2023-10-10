@@ -6,7 +6,12 @@ const vagaSchema = new mongoose.Schema({
   nome: { type: String, required: true },
   localizacao: { type: String, required: true},
   cargo: { type: String, required: true},
-  status: { type: String, required: true },
+  status: { type: String, required: true,
+    enum: {
+      values:['Inscreva-se ','Agendado', 'Finalizado'],
+      message: "Defina um opção"
+    }
+  },
 
 }, { versionKey: false });
 
