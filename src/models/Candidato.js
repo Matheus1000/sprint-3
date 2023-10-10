@@ -1,6 +1,8 @@
 import mongoose from 'mongoose';
 import validateCPF from '../businessRoles/validacaoCPF.js';
 import isEmailValid from '../businessRoles/validacaoEmail.js';
+import validatePhoneNumber from "../businessRoles/validacaoTelefone.js";
+import validateSenha from "../businessRoles/validacaoSenha.js";
 import bcrypt from 'bcryptjs';
 
 
@@ -13,16 +15,21 @@ const candidatoSchema = new mongoose.Schema({
           return validateCPF(valor);
         }
   },
-  telefone: { type: String, required: true },
+  telefone: { type: String, required: true,
+    validate:(valor) =>{
+      return validatePhoneNumber(valor);
+    }
+  
+  },
   vulnerabilidade: { type: String, required: true, enum: 
     {
-      values:["Pessoa com Deficiiao","PovosOriginarios", "BaixaRenda", "lgbtqiapn+", "PessoasNegra"],
+      values:["Pessoa com Deficiia","PovosOriginarios", "BaixaRenda", "lgbtqiapn+", "PessoasNegra"],
       message: "A vulnerabilidade fornecida não é um valor válido"
   }
 },
   sexo: { type: String, required: true,
         enum: {
-          values:["Heterossexual", "Homossexual", "Bissexual", "Assexual", "PanSexual", "Não me idetifico com oções acimas"],
+          values:['Masculino','Feminino', 'Não definido'],
           message: "Defina um opção"
         }
    },
@@ -31,7 +38,11 @@ const candidatoSchema = new mongoose.Schema({
       return isEmailValid(valor);
     }
   },
-  senha: { type: String, required: true}
+  senha: { type: String, required: true,
+    validate: (valor) => {
+      return validateSenha(valor);
+    }
+  }
 
 }, { versionKey: false });
 

@@ -1,8 +1,6 @@
-import login from "../models/Login.js";
-import candidato from "../models/Candidato.js"
-function loginValido(){
+function loginValidacao(){
     
     
 }
 
-export default loginValido;
+export default loginValidacao;

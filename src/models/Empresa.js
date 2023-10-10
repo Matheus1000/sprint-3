@@ -1,13 +1,28 @@
 import mongoose from 'mongoose';
+import isEmailValid from '../businessRoles/validacaoEmail.js';
+import validatePhoneNumber from "../businessRoles/validacaoTelefone.js";
+import validateSenha from "../businessRoles/validacaoSenha.js";
 import bcrypt from 'bcryptjs';
 
 const empresaSchema = new mongoose.Schema({
 
   id: { type: mongoose.Schema.Types.ObjectId },
   nome: { type: String, required: true},
-  cpf: { type: String, required: true , unique: true},
-  email: { type: String, required: true, unique: true},
-  senha: { type: String, required: true },
+  cpf: { type: String, required: true , unique: true,
+    validate: (valor) => {
+      return validateCPF(valor);
+  }
+  },
+  email: { type: String, required: true, unique: true,
+    validate: (valor) => {
+      return isEmailValid(valor);
+    }
+  },
+  senha: { type: String, required: true,
+    validate: (valor) => {
+      return validateSenha(valor);
+    }
+  },
   descricao: { type: String, required: true },
 
 }, { versionKey: false });
