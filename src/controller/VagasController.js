@@ -25,7 +25,7 @@ class VagasController {
       const vagaEmpresa = await vaga.create(req.body);
       res.status(201).json({ message: 'criado com sucesso', vaga: vagaEmpresa });
     } catch (erro) {
-      res.status(500).json({ message: `${erro.message} - falha ao cadastrar livro` });
+      res.status(500).json({ message: `${erro.message} - falha ao cadastrar candidato` });
     }
   }
 

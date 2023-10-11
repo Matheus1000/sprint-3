@@ -23,7 +23,7 @@ const candidatoSchema = new mongoose.Schema({
   },
   vulnerabilidade: { type: String, required: true, enum: 
     {
-      values:["Pessoa com Deficiia","PovosOriginarios", "BaixaRenda", "lgbtqiapn+", "PessoasNegra"],
+      values:["Pessoa com Deficia","PovosOriginarios", "BaixaRenda", "lgbtqiapn+", "PessoasNegra"],
       message: "A vulnerabilidade fornecida não é um valor válido"
   }
 },
