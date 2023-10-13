@@ -1,16 +1,16 @@
 import empresa from '../models/Empresa.js';
 
 class EmpresaController {
-  static async listarEmpresa(req, res) {
+  static async listarEmpresa(req, res, next) {
     try {
       const listarempresa = await empresa.find({});
       res.status(200).json(listarempresa);
     } catch (erro) {
-      res.status(500).json({ message: `Falha na requisição: ${erro.message}` });
+      next(erro);
     }
   }
 
-  static async listarEmpresaPorId(req, res) {
+  static async listarEmpresaPorId(req, res, next) {
     try {
       const id = req.params.id;
       const empresaEncontrado = await empresa.findById(id);
@@ -20,16 +20,16 @@ class EmpresaController {
     }
   }
 
-  static async cadastrarEmpresa(req, res) {
+  static async cadastrarEmpresa(req, res, next) {
     try {
       const novoEmpresa = await empresa.create(req.body);
       res.status(201).json({ message: 'criado com sucesso', empresa: novoEmpresa });
     } catch (erro) {
-      res.status(500).json({ message: `${erro.message} - falha ao cadastrar livro` });
+      next(erro)
     }
   }
 
-  static async atualizarEmpresa(req, res) {
+  static async atualizarEmpresa(req, res, next) {
     try {
       const empresaAtualizado = await empresa.findByIdAndUpdate(req.params.id, req.body);
       res.status(200).send(empresaAtualizado.nome);
@@ -38,7 +38,7 @@ class EmpresaController {
     }
   }
 
-  static async excluirEmpresa(req, res) {
+  static async excluirEmpresa(req, res, next) {
     try {
       const empresaDeletado = await empresa.findByIdAndDelete(req.params.id);
       res.send(empresaDeletado);

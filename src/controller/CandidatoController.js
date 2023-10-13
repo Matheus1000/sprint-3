@@ -2,7 +2,7 @@ import candidato from '../models/Candidato.js';
 
 
 class CandidatoController {
-  static async listarCandidato(req, res) {
+  static async listarCandidato(req, res, next) {
      
     const {limite = 5, pagina  = 1} = req.query;
 
@@ -13,7 +13,7 @@ class CandidatoController {
       .limit(limite);
       res.status(200).json(listarCandidato);
     } catch (erro) {
-      res.status(500).json({ message: `Falha na requisição: ${erro.message}` });
+      next(erro);
     }
   }
 
@@ -27,12 +27,12 @@ class CandidatoController {
     }
   }
 
-  static async cadastrarCandidato(req, res) {
+  static async cadastrarCandidato(req, res, next) {
     try {
       const novoCandidato = await candidato.create(req.body);
       res.status(201).json({ message: 'criado com sucesso', candidato: novoCandidato });
     } catch (erro) {
-      res.status(500).json({ message: `${erro.message} - falha ao cadastrar livro` });
+      next(erro);
     }
   }
 
@@ -53,6 +53,8 @@ class CandidatoController {
       next(erro);
     }
   }
+
+  
 }
 
 export default CandidatoController;
