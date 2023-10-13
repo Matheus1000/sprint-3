@@ -46,6 +46,8 @@ const candidatoSchema = new mongoose.Schema({
 
 }, { versionKey: false });
 
+/*
+
 candidatoSchema.pre('save', async function(next) {
 
   const salt = await bcrypt.genSalt();
@@ -68,7 +70,7 @@ candidatoSchema.statics.login = async function(email, senha){
   throw Error('Email incorreto');
 }
 
-
+*/
 const candidato = mongoose.model('candidato', candidatoSchema);
 
 export default candidato;

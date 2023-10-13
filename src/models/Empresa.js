@@ -24,12 +24,15 @@ const empresaSchema = new mongoose.Schema({
 
 }, { versionKey: false });
 
+/*
 empresaSchema.pre('save', async function(next) {
 
   const salt = await bcrypt.genSalt();
   this.senha = await bcrypt.hash(this.senha, salt);
   next();
 });
+
+
 
 empresaSchema.statics.login = async function(email, senha){
 
@@ -46,6 +49,7 @@ empresaSchema.statics.login = async function(email, senha){
   throw Error('Email incorreto');
 }
 
+*/
 const empresa = mongoose.model('empresa', empresaSchema);
 
 export default empresa;
