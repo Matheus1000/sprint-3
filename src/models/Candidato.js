@@ -15,14 +15,19 @@ const candidatoSchema = new mongoose.Schema({
   cpf: { type: String, 
     required: [true, "O cpf é obrigatório "], 
     unique: true,
-        validate: (valor) => {
-          return validateCPF(valor);
-        }
+    validate: {
+      validator: (valor) => {return validateCPF(valor);
+    },
+      message : 'Por favor, digite nesse formato: XXX.XXX.XXX-XX'
+    }
+
   },
   telefone: { type: String, 
     required: [true, "O telefone é obrigatório"],
-    validate:(valor) =>{
-      return validatePhoneNumber(valor);
+    validate: {
+      validator: (valor) => {return validatePhoneNumber(valor);
+    },
+      message : 'Por favor, digite nesse formato: (DD) XXXXX-XXXX'
     }
   
   },
@@ -30,7 +35,7 @@ const candidatoSchema = new mongoose.Schema({
       required: [true, "A vulnerabilidade é obigatória o cadastro" ],
       enum: 
     {
-      values:["Pessoa com Deficia","Povos Originarios", "Baixa Renda", "lgbtqiapn+", "Pessoas Negra"],
+      values:["Pessoa com deficiência","Povos originários", "Baixa Renda", "lgbtqiapn+", "Pessoas Negra"],
       message: "A vulnerabilidade fornecida não é um valor válido"
   }
 },
@@ -45,14 +50,18 @@ const candidatoSchema = new mongoose.Schema({
   email: { type: String, 
     required: [true, "Digite um email válido"],
     unique: true,
-    validate: (valor) => {
-      return isEmailValid(valor);
+    validate: {
+      validator: (valor) => {return isEmailValid(valor);
+    },
+      message : 'Por favor, digite nesse formato: XXX@email.'
     }
   },
   senha: { type: String, 
-    required: [true, "A senha deve seguir o padrão de: Iniciar com letra (A) em maíuscula, seguido por 6 números e finalizar com caracter(@)"],
-    validate: (valor) => {
-      return validarSenha(valor);
+    required: [true, "A senha é obrigatória"],
+    validate: {
+      validator: (valor) => {return validarSenha(valor);
+    },
+      message : 'Por favor, digite nesse formato: A primeira letra (A), seguida por 6 números e finalizando com (@)'
     }
   }
 

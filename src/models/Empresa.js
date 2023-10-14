@@ -9,18 +9,24 @@ const empresaSchema = new mongoose.Schema({
   id: { type: mongoose.Schema.Types.ObjectId },
   nome: { type: String, require: true},
   cpf: { type: String, required: true , unique: true,
-    validate:(valor) =>{
-      return validateCPF(valor); 
+    validate: {
+      validator: (valor) => {return validateCPF(valor);
+    },
+      message : 'Por favor, digite nesse formato: XXX.XXX.XXX-XX'
     }
   },
   email: { type: String, required: true, unique: true,
-    validate: (valor) => {
-      return isEmailValid(valor);
+    validate: {
+      validator: (valor) => {return isEmailValid(valor);
+    },
+      message : 'Por favor, digite nesse formato: XXX@email.'
     }
   },
   senha: { type: String, required: true,
-    validate: (valor) => {
-      return validateSenha(valor);
+    validate: {
+      validator: (valor) => {return validarSenha(valor);
+    },
+      message : 'Por favor, digite nesse formato: A primeira letra (B), seguida por 6 números e finalizando com (@)'
     }
   },
   descricao: { type: String},

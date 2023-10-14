@@ -3,6 +3,7 @@ import express from 'express';
 import createNaDatabase from './config/dbConnect.js';
 import routes from './routes/index.js';
 import manipularDeErros from './middlwares/manipularErros.js'
+import manipularDe404 from "./middlwares/manipulador404.js";
 
 
 const conexao = await createNaDatabase();
@@ -17,6 +18,7 @@ conexao.once('open', () => {
   console.log('Conexão com bando feita com sucesso');
 });
 
+app.use(manipularDe404);
 app.use(manipularDeErros);
 
 export default app;
