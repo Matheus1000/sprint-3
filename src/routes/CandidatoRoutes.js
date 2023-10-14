@@ -4,8 +4,8 @@ import CandidatoController from '../controller/CandidatoController.js';
 const routes = express.Router();
 
 routes.get('/candidatos', CandidatoController.listarCandidato);
-routes.get('/candidatos/listarVulnerabidade', CandidatoController.listarVulnerabidade);
-routes.get('/candidato/verificarVulnerabilidade', CandidatoController.verificarVulnerabilidade);
+routes.get('/candidato/busca', CandidatoController.listarVulnerabilidade);
+routes.get('/candidato/verificar', CandidatoController.verificarVulnerabilidade);
 routes.get('/candidato/:id', CandidatoController.listarCandidatoPorId);
 routes.post('/candidato', CandidatoController.cadastrarCandidato);
 routes.put('/candidato/:id', CandidatoController.atualizarCandidato);

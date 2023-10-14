@@ -1,20 +1,26 @@
-import NaoEncontrado from '../error/NaoEncontrado.js';
+import NaoEncontrado from '../erros/NaoEncontrado.js';
 import candidato from '../models/Candidato.js';
+import RequisicaoIncorreta from '../erros/RequisicaoIncorreta.js'
 
 
 class CandidatoController {
   static async listarCandidato(req, res, next) {
-     
-    const {limite = 5, pagina  = 1} = req.query;
+   try{  
+    let {limite = 5, pagina  = 1} = req.query;
 
+    limite = parseInt(limite);
+    pagina = parseInt(pagina);
 
-    try {
-
+    if(limite > 0 && pagina > 0){
       const listarCandidato = await candidato.find({})
       .skip((pagina - 1) * limite)
       .limit(limite);
       res.status(200).json(listarCandidato);
-    } catch (erro) {
+    }else {
+      next(new RequisicaoIncorreta());
+    }
+    
+  }catch (erro) {
       next(erro);
     }
   }
@@ -64,25 +70,36 @@ class CandidatoController {
     }
   }
 
-  static listarVulnerabidade = async(req, res, next) =>{
+  static listarVulnerabilidade = async(req, res, next) =>{
 
 
     try {
-      const {vulnerabilidade} = req.query;
+      let {limite = 5, pagina  = 1,ordenacao ="_id:-1",  vulnerabilidade} = req.query;
+
+      const [campoOrdenacao, ordem]  = ordenacao.split(":"); 
+      
+      limite = parseInt(limite);
+      pagina = parseInt(pagina);
 
       const busca = {};
 
-      
+
       if(vulnerabilidade) busca.vulnerabilidade = {$regex: vulnerabilidade, $options: "i"};
 
 
-      const candidatoEncontrado = await candidato.find(busca);
-
-      res.json(candidatoEncontrado);
+      if(limite > 0 && pagina > 0){
+        const listarVulnerabilidade = await candidato.find(busca)
+        .sort({ [campoOrdenacao] : ordem})
+        .skip((pagina - 1) * limite)
+        .limit(limite);
+        res.status(200).json(listarVulnerabilidade);
+      }else {
+        next(new RequisicaoIncorreta());
+      }
     } catch (erro) {
       next(erro);
     }
-
+  
   }
 
   static verificarVulnerabilidade = async(req, res, next) =>{

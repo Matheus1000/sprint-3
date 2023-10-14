@@ -35,7 +35,7 @@ const candidatoSchema = new mongoose.Schema({
       required: [true, "A vulnerabilidade é obigatória o cadastro" ],
       enum: 
     {
-      values:["Pessoa com deficiência","Povos originários", "Baixa Renda", "lgbtqiapn+", "Pessoas Negra"],
+      values:["Pessoa com deficiência","Povos originários", "Baixa renda", "lgbtqiapn", "Pessoa negra"],
       message: "A vulnerabilidade fornecida não é um valor válido"
   }
 },
@@ -61,7 +61,7 @@ const candidatoSchema = new mongoose.Schema({
     validate: {
       validator: (valor) => {return validarSenha(valor);
     },
-      message : 'Por favor, digite nesse formato: A primeira letra (A), seguida por 6 números e finalizando com (@)'
+      message : 'Por favor, digite a senha neste formato: A primeira letra (A), seguida por 6 números e finalizando com (@)'
     }
   }
 
