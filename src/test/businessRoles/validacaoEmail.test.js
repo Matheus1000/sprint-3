@@ -1,4 +1,4 @@
-import isEmailValid from "../businessRoles/validacaoEmail";
+import isEmailValid from "../../businessRoles/validacaoEmail";
 
 
 describe('Teste para verificar validacao de email', ()=>{

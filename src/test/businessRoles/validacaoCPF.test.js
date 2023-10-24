@@ -1,4 +1,4 @@
-import validateCPF from "../businessRoles/validacaoCPF.js";
+import validateCPF from "../../businessRoles/validacaoCPF.js";
 
 describe('Teste para verificar validacao de CPF', ()=>{
 

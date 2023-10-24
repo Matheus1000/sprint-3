@@ -1,4 +1,4 @@
-import validacaoTelefone from "../businessRoles/validacaoTelefone.js";
+import validacaoTelefone from "../../businessRoles/validacaoTelefone.js";
 
 describe('Teste para verificar validacao de Telefone', ()=>{
 

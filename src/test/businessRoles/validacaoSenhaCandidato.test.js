@@ -1,4 +1,4 @@
-import validarSenha from "../businessRoles/validacaoSenhaCandidato.js";
+import validarSenha from "../../businessRoles/validacaoSenhaCandidato.js";
 
 
 describe('Teste para verificar validacao de senha', ()=>{

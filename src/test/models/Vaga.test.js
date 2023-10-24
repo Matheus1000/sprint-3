@@ -9,7 +9,7 @@ describe('Testando o modelo Vaga', () =>{
     const cargo = 'Analista de Sistema';
     const status = 'Agendado';
 
-     const objetoVaga = {nome,localizacao, cargo, status}
+    const objetoVaga = {nome,localizacao, cargo, status}
    
 
     it('Deve instaciar uma nova vaga', () =>{

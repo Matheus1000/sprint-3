@@ -32,7 +32,7 @@ class VagasController {
   static async atualizarVaga(req, res, next) {
     try {
       const vagaAtualizado = await vaga.findByIdAndUpdate(req.params.id, req.body);
-      res.status(200).send(vagaAtualizado.nome);
+      res.status(204).send(vagaAtualizado.nome);
     } catch (erro) {
       next(erro);
     }
@@ -41,7 +41,7 @@ class VagasController {
   static async excluirVaga(req, res, next) {
     try {
       const vagaDeletado = await vaga.findByIdAndDelete(req.params.id);
-      res.send(vagaDeletado);
+      res.status(200).send(vagaDeletado);
     } catch (erro) {
       next(erro);
     }
