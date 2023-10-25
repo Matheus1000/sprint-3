@@ -5,6 +5,7 @@ import vagas from './VagasRoutes.js';
 import auth from './authRoutes.js';
 
 
+//Open Route - Public
 const routes = (app) => {
   app.route('/').get((req, res) => res.status(200).send('Projeto EveryMind'));
 

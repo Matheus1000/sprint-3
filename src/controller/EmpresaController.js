@@ -32,7 +32,7 @@ class EmpresaController {
   static async atualizarEmpresa(req, res, next) {
     try {
       const empresaAtualizado = await empresa.findByIdAndUpdate(req.params.id, req.body);
-      res.status(200).send(empresaAtualizado.nome);
+      res.status(204).send(empresaAtualizado.nome);
     } catch (erro) {
       next(erro);
     }

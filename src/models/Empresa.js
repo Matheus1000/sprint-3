@@ -1,8 +1,9 @@
 import mongoose from 'mongoose';
 import validateCPF from '../businessRoles/validacaoCPF.js';
 import isEmailValid from '../businessRoles/validacaoEmail.js';
-import validateSenha from "../businessRoles/validacaoSenhaEmpresa.js";
+import validarSenha from "../businessRoles/validacaoSenhaEmpresa.js";
 import bcrypt from 'bcryptjs';
+
 
 const empresaSchema = new mongoose.Schema({
 
@@ -33,32 +34,30 @@ const empresaSchema = new mongoose.Schema({
 
 }, { versionKey: false });
 
-/*
-empresaSchema.pre('save', async function(next) {
+//funcao utilizada para após a criação no banco de dados
+empresaSchema.pre('save',async function(next){
 
   const salt = await bcrypt.genSalt();
   this.senha = await bcrypt.hash(this.senha, salt);
   next();
 });
 
-
+// Método estático para logar na aplicação 
 
 empresaSchema.statics.login = async function(email, senha){
 
-  const empresa = await this.findOne({ email})
+  const empresa = await this.findOne({email});
 
   if(empresa){
-   const auth = await bcrypt.compare(senha, empresa.senha);
-   if(auth){
-    return empresa
-   }
-   throw Error('Senha incorreta');
-
+    const auth = await bcrypt.compare(senha, empresa.senha);
+    if(auth){
+      return empresa;
+    }
+    throw Error('Senha incorreta');
   }
   throw Error('Email incorreto');
 }
 
-*/
-const empresa = mongoose.model('empresa', empresaSchema);
+const Empresa = mongoose.model('empresa', empresaSchema);
 
-export default empresa;
+export default Empresa;

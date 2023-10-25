@@ -67,31 +67,32 @@ const candidatoSchema = new mongoose.Schema({
 
 }, { versionKey: false });
 
-/*
+//funcao utilizada para após a criação no banco de dados
+candidatoSchema.pre('save',async function(next){
 
-candidatoSchema.pre('save', async function(next) {
-
-  const salt = await bcrypt.genSalt();
-  this.senha = await bcrypt.hash(this.senha, salt);
-  next();
+    const salt = await bcrypt.genSalt();
+    this.senha = await bcrypt.hash(this.senha, salt);
+    next();
 });
+
+// Método estático para logar na aplicaç 
 
 candidatoSchema.statics.login = async function(email, senha){
 
-  const candidato = await this.findOne({ email})
+  const candidato = await this.findOne({email});
+  
 
   if(candidato){
-   const auth = await bcrypt.compare(senha, candidato.senha);
-   if(auth){
-    return candidato
-   }
-   throw Error('Senha incorreta');
-
+    const auth = await bcrypt.compare(senha, candidato.senha);
+    if(auth){
+      return candidato;
+    }
+    throw Error('Senha incorreta');
   }
   throw Error('Email incorreto');
 }
 
-*/
-const candidato = mongoose.model('candidato', candidatoSchema);
 
-export default candidato;
+const Candidato = mongoose.model('candidato', candidatoSchema);
+
+export default Candidato;

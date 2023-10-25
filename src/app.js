@@ -1,4 +1,5 @@
 import "dotenv/config";
+import cookieParser from "cookie-parser";
 import express from 'express';
 import createNaDatabase from './config/dbConnect.js';
 import routes from './routes/index.js';
@@ -17,6 +18,11 @@ conexao.on('error', (erro) => {
 conexao.once('open', () => {
   console.log('Conexão com bando feita com sucesso');
 });
+
+//Config JSON response
+app.use(express.json());
+app.use(cookieParser());
+
 
 app.use(manipularDe404);
 app.use(manipularDeErros);

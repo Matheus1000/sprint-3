@@ -52,7 +52,7 @@ class CandidatoController {
     try {
       const candidatoAtualizado = await candidato.findByIdAndUpdate(req.params.id, req.body);
       if (candidatoAtualizado !== null){
-        res.status(200).json(candidatoAtualizado);
+        res.status(204).json(candidatoAtualizado);
       }else{
         next(new NaoEncontrado("Id não encontrado"));
       }

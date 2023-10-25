@@ -3,10 +3,8 @@ import AuthController from '../controller/authController.js';
 
 const routes = express.Router();
 
-
-routes.get('/login', AuthController.login_get);
-routes.post('/login', AuthController.login_post);
-
+routes.post('/loginCandidato', AuthController.loginCandidato);
+routes.post('/loginEmpresa', AuthController.loginEmpresa);
 
 
 export default routes;
