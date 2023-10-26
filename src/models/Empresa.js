@@ -53,9 +53,9 @@ empresaSchema.statics.login = async function(email, senha){
     if(auth){
       return empresa;
     }
-    throw Error('Senha incorreta');
+    throw  Error('Senha incorreta');
   }
-  throw Error('Email incorreto');
+  throw  Error('Email incorreto');
 }
 
 const Empresa = mongoose.model('empresa', empresaSchema);

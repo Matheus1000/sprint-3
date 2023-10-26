@@ -9,7 +9,7 @@ import auth from './authRoutes.js';
 const routes = (app) => {
   app.route('/').get((req, res) => res.status(200).send('Projeto EveryMind'));
 
-  app.use(express.json(), candidatos,empresas, vagas, auth);
+  app.use(express.json(),vagas,auth, candidatos,empresas);
 };
 
 export default routes;

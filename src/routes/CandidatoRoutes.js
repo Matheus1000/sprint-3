@@ -1,7 +1,11 @@
 import express from 'express';
 import CandidatoController from '../controller/CandidatoController.js';
+import autentificacao from '../middlwares/autentification.js';
+
 
 const routes = express.Router();
+
+routes.use(autentificacao);
 
 routes.get('/candidatos', CandidatoController.listarCandidato);
 routes.get('/candidato/busca', CandidatoController.listarVulnerabilidade);

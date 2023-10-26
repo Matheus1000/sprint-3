@@ -24,6 +24,7 @@ app.use(express.json());
 app.use(cookieParser());
 
 
+
 app.use(manipularDe404);
 app.use(manipularDeErros);
 
